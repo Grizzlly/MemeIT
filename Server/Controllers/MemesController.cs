@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using MemeIT.Server.Database;
 using Microsoft.AspNetCore.Authorization;
 using MemeIT.Shared.Models;
+using Mapster;
 
 namespace MemeIT.Server.Controllers
 {
@@ -18,22 +19,29 @@ namespace MemeIT.Server.Controllers
     {
         private readonly ApplicationDbContext _context;
 
+        private readonly TypeAdapterConfig config;
+
         public MemesController(ApplicationDbContext context)
         {
             _context = context;
-        }
 
+            config = new();
+            config.ForType<Meme, MemeDto>()
+                .Map(dest => dest.CreatorUsername, src => src.Creator != null ? src.Creator!.UserName : null);
+        }
 
         [HttpGet]
         [Route("memes")]
-        public ActionResult<IEnumerable<MemeDTO>> GetMemes()
+        public ActionResult<IEnumerable<MemeDto>> GetMemes()
         {
             if(_context.Memes is null)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
-            return Ok(_context.Memes.ToList());
+            var memes = _context.Memes.Include(m => m.Creator).ToList();
+
+            return Ok(memes.Select(x => x.Adapt<MemeDto>(config)));
         }
     }
 }
