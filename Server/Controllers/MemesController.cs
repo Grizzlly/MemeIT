@@ -9,6 +9,7 @@ using MemeIT.Server.Database;
 using Microsoft.AspNetCore.Authorization;
 using MemeIT.Shared.Models;
 using Mapster;
+using System.Security.Claims;
 
 namespace MemeIT.Server.Controllers
 {
@@ -57,6 +58,27 @@ namespace MemeIT.Server.Controllers
 
             if (meme is null) return NotFound();
             else return Ok(meme.Adapt<MemeDto>(config));
+        }
+
+        [HttpPost]
+        [Route("memes")]
+        public IActionResult InsertMeme([FromBody] MemeDto? meme)
+        {
+            if (meme is null) return BadRequest();
+
+            Meme newMeme = meme.Adapt<Meme>();
+
+            newMeme.MemeId = new Guid();
+
+            string claimid = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)!.Value;
+
+            if(!Guid.TryParse(claimid, out Guid claim)) return StatusCode(StatusCodes.Status500InternalServerError);
+
+            newMeme.CreatorId = claim;
+
+            _context.Memes.Add(newMeme);
+
+            return CreatedAtRoute("memes", newMeme.MemeId);
         }
     }
 }
