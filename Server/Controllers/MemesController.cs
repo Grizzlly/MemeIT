@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -42,6 +42,21 @@ namespace MemeIT.Server.Controllers
             var memes = _context.Memes.Include(m => m.Creator).ToList();
 
             return Ok(memes.Select(x => x.Adapt<MemeDto>(config)));
+        }
+
+        [HttpGet]
+        [Route("memes/{memeid:guid}")]
+        public ActionResult<MemeDto> GetMeme(Guid memeid)
+        {
+            if (_context.Memes is null)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+            var meme = _context.Memes.Where(m => m.MemeId == memeid).FirstOrDefault(defaultValue: null);
+
+            if (meme is null) return NotFound();
+            else return Ok(meme.Adapt<MemeDto>(config));
         }
     }
 }
