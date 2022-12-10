@@ -80,5 +80,22 @@ namespace MemeIT.Server.Controllers
 
             return CreatedAtRoute("memes", newMeme.MemeId);
         }
+
+        [HttpPut]
+        [Route("memes/{memeid:guid}")]
+        public IActionResult PutMeme(Guid memeid, [FromBody] MemeDto? meme)
+        {
+            if (meme.HasValue is false) return BadRequest();
+
+            var existingMeme = _context.Memes.Where(m => m.MemeId == memeid).FirstOrDefault(defaultValue: null);
+
+            if (existingMeme == null) return NotFound();
+
+            existingMeme.Description = meme.Value.Description ?? string.Empty;
+
+            _context.SaveChanges();
+
+            return NoContent();
+        }
     }
 }
