@@ -97,5 +97,24 @@ namespace MemeIT.Server.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete]
+        [Route("memes/{memeid:guid}")]
+        public IActionResult DeleteMeme(Guid memeid)
+        {
+            var existingMeme = _context.Memes.Where(m => m.MemeId == memeid).FirstOrDefault(defaultValue: null);
+
+            if (existingMeme is null) return BadRequest();
+
+            string nameidentifier_claim = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)!.Value;
+            if (!Guid.TryParse(nameidentifier_claim, out Guid nameidentifier)) return StatusCode(StatusCodes.Status500InternalServerError);
+
+            if(existingMeme?.CreatorId != nameidentifier) return Unauthorized();
+
+            _context.Memes.Remove(existingMeme);
+            _context.SaveChanges();
+
+            return NoContent();
+        }
     }
 }
