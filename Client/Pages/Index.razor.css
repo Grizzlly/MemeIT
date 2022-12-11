@@ -1,0 +1,93 @@
+﻿
+.fullhero {
+    width: 100%;
+    height: 100vh;
+    padding-top: var(--nav-height);
+    padding-bottom: var(--nav-height);
+    --padding: 2rem;
+}
+
+.landing {
+    display: flex;
+    flex-direction: row;
+}
+
+    .landing > div {
+        flex: 0 0 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+.heroimg {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.herotext {
+    padding: var(--padding);
+    flex-direction: column;
+}
+
+.uploadhero {
+    background: var(--back-color);
+    display: flex;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: row;
+    height: 80%;
+    width: 80%;
+    background: white;
+    border-radius: 20px;
+    margin: auto;
+}
+
+    .form-container > div, .form-container > form {
+        flex: 0 0 50%;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+input {
+    padding: 0.1em;
+    border-radius: 5px;
+    border: 1px solid var(--back-color);
+    margin-bottom: 1ch;
+}
+
+input[type=text] {
+    height: 2em;
+}
+
+.hero-viewed {
+    height: 300px;
+    padding: 2rem;
+}
+
+.hero-title {
+    height: 5rem;
+    height: 50px;
+}
+
+.images {
+    display : flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    overflow: auto;
+    gap: 1rem;
+}
+
+.images > .img-container {
+    aspect-ratio: 1;
+    height: 200px;
+    border-radius: 50px;
+    background: grey;
+}
