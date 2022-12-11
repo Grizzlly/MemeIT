@@ -1,15 +1,16 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <NavMenu />
+<NavMenu />
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
+<main>
+    @Body
+</main>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+<footer>
+    <div class="socials">
+        <img src="img/socials-insta.svg" />
+        <img src="img/socials-twitch.svg" />
+        <img src="img/socials-fb.svg" />
+    </div>
+    <p>Copyright &copy; 2022 | La muncă, nu la întins mâna.</p>
+</footer>

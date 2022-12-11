@@ -1,4 +1,6 @@
-﻿#blazor-error-ui {
+﻿@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:wght@400;700&display=swap');
+
+#blazor-error-ui {
     background: lightyellow;
     bottom: 0;
     box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
@@ -29,4 +31,76 @@
 
 *, *::before, *::after {
     box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#app {
+    height: 100vh;
+    width: 100vw;
+    overflow: auto;
+}
+
+/* TYPOGRAPHY */
+
+html, body {
+    font-family: 'Merriweather', sans-serif;
+    color: #252F65;
+}
+
+h1, p {
+    margin-bottom: 0.75em;
+}
+
+b, strong {
+    font-weight: 900;
+}
+
+/**/
+
+:root {
+    --nav-height: 70px;
+    --back-color: #6F3096;
+}
+
+.d-none {
+    display: none !important;
+}
+
+.btn {
+    cursor: pointer;
+    border-radius: 5px;
+    background: var(--back-color);
+    color: white;
+    padding: 1rem;
+    font-weight: 700;
+}
+
+@media (min-width: 576px) {
+
+}
+
+/* `sm` applies to x-small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+
+}
+
+/* `md` applies to small devices (landscape phones, less than 768px) */
+@media (max-width: 767.98px) {
+}
+
+/* `lg` applies to medium devices (tablets, less than 992px) */
+@media (max-width: 991.98px) {
+}
+
+/* `xl` applies to large devices (desktops, less than 1200px) */
+@media (max-width: 1199.98px) {
+}
+
+/* `xxl` applies to x-large devices (large desktops, less than 1400px) */
+@media (max-width: 1399.98px) {
 }
