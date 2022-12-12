@@ -11,22 +11,22 @@
                 <img class="closeicon" src="img/close-circle-outline.svg" @onclick="@ToggleLogin"/>
             </header>
             <div class="form-container">
-                <form>
+                <form onsubmit="return false;">
                     <h2>Welcome back</h2>
 
                     <label>
                         Username
                         <br />
-                        <input type="text" placeholder="username" />
+                        <input type="text" placeholder="username" @bind-value="@loginModel.UserName" />
                     </label>
 
                     <label>
                         Password
                         <br />
-                        <input type="password" placeholder="parola" />
+                        <input type="password" placeholder="parola" @bind-value="@loginModel.Password" />
                     </label>
 
-                    <button type="submit">Logare</button>
+                    <button type="submit" @onclick="@Login" >Logare</button>
                 </form>
             </div>
         </div>
@@ -37,28 +37,28 @@
                 <img class="closeicon" src="img/close-circle-outline.svg" @onclick="@ToggleRegister" />
             </header>
             <div class="form-container">
-                <form>
+                <form onsubmit="return false;">
                     <h2>Welcome</h2>
 
                     <label>
                         Username
                         <br />
-                        <input type="text" placeholder="username" />
+                        <input type="text" placeholder="username" @bind-value="@registerModel.UserName" />
                     </label>
 
                     <label>
                         Email
                         <br />
-                        <input type="email" placeholder="username" />
+                        <input type="email" placeholder="email" @bind-value="@registerModel.Email" />
                     </label>
 
                     <label>
                         Password
                         <br />
-                        <input type="password" placeholder="parola" />
+                        <input type="password" placeholder="parola" @bind-value="@registerModel.Password" />
                     </label>
 
-                    <button type="submit">Creare cont</button>
+                    <button type="submit" @onclick="@Register">Creare cont</button>
                 </form>
             </div>
         </div>

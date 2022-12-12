@@ -2,8 +2,8 @@
 {
     public record class JwtToken
     {
-        public string Token { get; } = default!;
+        public string Token { get; init; } = string.Empty;
 
-        public DateTime? Expiration { get; } = default!;
+        public DateTime? Expiration { get; init; } = default!;
     }
 }

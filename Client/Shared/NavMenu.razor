@@ -1,10 +1,19 @@
-﻿
+﻿@using MemeIT.Client.Authentication;
+@using Microsoft.AspNetCore.Components.Authorization;
+
 <nav>
     <img src="img/logo.svg" />
 
     <div class="profilebtns">
-        <a href="#" @onclick="@ToggleLogin">Logare</a>
-        <a href="#" @onclick="@ToggleRegister">Creare cont</a>
+        @if (loggedin is true)
+        {
+            <a href="#" @onclick="@Logout">Bună, @name!</a>
+        }
+        else
+        {
+            <a href="#" @onclick="@ToggleLogin">Logare</a>
+            <a href="#" @onclick="@ToggleRegister">Creare cont</a>
+        }
     </div>
 </nav>
 
@@ -14,4 +23,32 @@
 
     [Parameter, EditorRequired]
     public Action ToggleRegister { get; set; } = default!;
+
+    [CascadingParameter]
+    public Task<AuthenticationState> authenticationStateTask { get; set; } = default!;
+
+    [Inject]
+    private IAuthenticationService authenticationService { get; set; } = default!;
+
+    [Inject]
+    private NavigationManager NavigationManager { get; set; } = default!;
+
+    private bool loggedin = false;
+    private string name = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await authenticationStateTask;
+
+        loggedin = authState.User?.Identity?.IsAuthenticated ?? false;
+        name = authState.User?.Identity?.Name ?? string.Empty;
+
+        await base.OnInitializedAsync();
+    }
+
+    private async void Logout()
+    {
+        await authenticationService.Logout();
+        NavigationManager.NavigateTo("/", forceLoad: true);
+    }
 }

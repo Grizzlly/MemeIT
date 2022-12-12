@@ -15,7 +15,7 @@ namespace MemeIT.Server.Controllers.Authentication
     [Route("api/authentication")]
     public class AuthenticateController : ControllerBase
     {
-        private static readonly SymmetricSecurityKey SecurityAppKey = new(Encoding.ASCII.GetBytes("ByYM000OLlMQG6VVVp1OH7Xzyr7gHuw1qvUC5dcGt3SNM"));
+        public static readonly SymmetricSecurityKey SecurityAppKey = new(Encoding.ASCII.GetBytes("ByYM000OLlMQG6VVVp1OH7Xzyr7gHuw1qvUC5dcGt3SNM"));
 
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IConfiguration configuration;
