@@ -27,7 +27,7 @@ namespace MemeIT.Client.Authentication
         {
             StringContent content = ApiService.PrepareStringContent(loginModel);
 
-            using HttpResponseMessage responseMessage = await httpClient.PostAsync("api/authenticate/login", content);
+            using HttpResponseMessage responseMessage = await httpClient.PostAsync("api/authentication/login", content);
 
             if (responseMessage.IsSuccessStatusCode is false)
             {
@@ -58,7 +58,7 @@ namespace MemeIT.Client.Authentication
         {
             StringContent content = ApiService.PrepareStringContent(registerModel);
 
-            using HttpResponseMessage responseMessage = await httpClient.PostAsync("api/authenticate/register", content);
+            using HttpResponseMessage responseMessage = await httpClient.PostAsync("api/authentication/register", content);
 
             Task<AuthResponse> response = responseMessage.Content.ReadFromJsonAsync<AuthResponse>()!;
 
