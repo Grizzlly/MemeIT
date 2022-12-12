@@ -3,7 +3,15 @@
     <img src="img/logo.svg" />
 
     <div class="profilebtns">
-        <a href="#">Logare</a>
-        <a href="#">Creare cont</a>
+        <a href="#" @onclick="@ToggleLogin">Logare</a>
+        <a href="#" @onclick="@ToggleRegister">Creare cont</a>
     </div>
 </nav>
+
+@code {
+    [Parameter, EditorRequired]
+    public Action ToggleLogin { get; set; } = default!;
+
+    [Parameter, EditorRequired]
+    public Action ToggleRegister { get; set; } = default!;
+}

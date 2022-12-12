@@ -42,7 +42,8 @@ html, body {
 #app {
     height: 100vh;
     width: 100vw;
-    overflow: auto;
+    overflow: hidden;
+    position: relative;
 }
 
 /* TYPOGRAPHY */
@@ -60,6 +61,10 @@ b, strong {
     font-weight: 900;
 }
 
+button, input, textarea {
+    font-family: inherit;
+}
+
 /**/
 
 :root {
@@ -71,14 +76,35 @@ b, strong {
     display: none !important;
 }
 
-.btn {
+a {
+    text-decoration: none;
+    color: dimgrey;
+}
+
+button {
     cursor: pointer;
     border-radius: 5px;
     background: var(--back-color);
     color: white;
     padding: 1rem;
     font-weight: 700;
+    border: none;
+    appearance: button;
 }
+
+input {
+    padding: 0.1em;
+    border-radius: 5px;
+    border: 1px solid var(--back-color);
+    margin-bottom: 1ch;
+    height: 2em;
+    width: 80%;
+}
+
+    input[type=text], input[type=password], input[type=email] {
+        height: 2.5em;
+    }
+
 
 @media (min-width: 576px) {
 
