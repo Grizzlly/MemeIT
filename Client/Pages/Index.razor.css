@@ -56,17 +56,6 @@
         justify-content: center;
     }
 
-input {
-    padding: 0.1em;
-    border-radius: 5px;
-    border: 1px solid var(--back-color);
-    margin-bottom: 1ch;
-}
-
-input[type=text] {
-    height: 2em;
-}
-
 .hero-viewed {
     height: 300px;
     padding: 2rem;

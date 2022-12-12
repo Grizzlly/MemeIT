@@ -1,16 +1,125 @@
 ﻿@inherits LayoutComponentBase
 
-<NavMenu />
+<div class="page" style="@NoScrollStyle">
 
-<main>
-    @Body
-</main>
+    <NavMenu ToggleLogin="@ToggleLogin" ToggleRegister="@ToggleRegister" />
 
-<footer>
-    <div class="socials">
-        <img src="img/socials-insta.svg" />
-        <img src="img/socials-twitch.svg" />
-        <img src="img/socials-fb.svg" />
-    </div>
-    <p>Copyright &copy; 2022 | La muncă, nu la întins mâna.</p>
-</footer>
+    <section class="@OverlayShownClass">
+        <div class="overlay @LoginShownClass">
+            <header>
+                <img class="logo" src="img/logo.svg" />
+                <img class="closeicon" src="img/close-circle-outline.svg" @onclick="@ToggleLogin"/>
+            </header>
+            <div class="form-container">
+                <form>
+                    <h2>Welcome back</h2>
+
+                    <label>
+                        Username
+                        <br />
+                        <input type="text" placeholder="username" />
+                    </label>
+
+                    <label>
+                        Password
+                        <br />
+                        <input type="password" placeholder="parola" />
+                    </label>
+
+                    <button type="submit">Logare</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="overlay @RegisterShownClass">
+            <header>
+                <img class="logo" src="img/logo.svg" />
+                <img class="closeicon" src="img/close-circle-outline.svg" @onclick="@ToggleRegister" />
+            </header>
+            <div class="form-container">
+                <form>
+                    <h2>Welcome</h2>
+
+                    <label>
+                        Username
+                        <br />
+                        <input type="text" placeholder="username" />
+                    </label>
+
+                    <label>
+                        Email
+                        <br />
+                        <input type="email" placeholder="username" />
+                    </label>
+
+                    <label>
+                        Password
+                        <br />
+                        <input type="password" placeholder="parola" />
+                    </label>
+
+                    <button type="submit">Creare cont</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <main style="position: relative;">
+            @Body
+    </main>
+
+    <footer>
+        <div class="socials">
+            <img src="img/socials-insta.svg" />
+            <img src="img/socials-twitch.svg" />
+            <img src="img/socials-fb.svg" />
+        </div>
+        <p>Copyright &copy; 2022 | La muncă, nu la întins mâna.</p>
+    </footer>
+</div>
+
+@code {
+    private bool loginShown = false;
+    private bool registerShown = false;
+
+    private string LoginShownClass
+    {
+        get
+        {
+            return loginShown == false ? "d-none" : string.Empty;
+        }
+    }
+    private string RegisterShownClass
+    {
+        get
+        {
+            return registerShown == false ? "d-none" : string.Empty;
+        }
+    }
+
+    private string OverlayShownClass
+    {
+        get
+        {
+            return (!loginShown && !registerShown) == true ? "d-none" : string.Empty;
+        }
+    }
+
+    private string NoScrollStyle
+    {
+        get
+        {
+            return loginShown || registerShown == true ? "overflow: hidden !important;" : string.Empty;
+        }
+    }
+
+    private void ToggleLogin()
+    {
+        loginShown = !loginShown;
+    }
+
+    private void ToggleRegister()
+    {
+        registerShown = !registerShown;
+    }
+}
