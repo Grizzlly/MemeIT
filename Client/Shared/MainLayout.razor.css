@@ -104,9 +104,15 @@ footer {
     padding: 2rem;
 }
 
-.socials > img {
+.socials {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.socials > a {
     aspect-ratio: 1;
     height: 25px;
-    display: inline-block;
     margin: 0 0.2rem 0 0.2rem;
+    margin: 0;
+    display: inline-block;
 }

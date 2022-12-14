@@ -1,0 +1,27 @@
+﻿@using Microsoft.JSInterop
+
+<span @attributes="@OtherAttributes" @onclick="@ScrollToElement">
+    @ChildContent
+</span>
+
+
+@code {
+    [Inject]
+    private IJSRuntime? JSRuntime { get; set; }
+
+    [Parameter, EditorRequired]
+    public string ElementId { get; set; } = string.Empty;
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; } = default!;
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> OtherAttributes { get; set; } = default!;
+
+    private async void ScrollToElement()
+    {
+        IJSObjectReference module = await JSRuntime!.InvokeAsync<IJSObjectReference>("import", "./Components/AnchorLink/AnchorLink.razor.js");
+        await module.InvokeVoidAsync("ScrollToElementById", ElementId);
+        await module.DisposeAsync();
+    }
+}
