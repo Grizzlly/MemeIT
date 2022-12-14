@@ -7,14 +7,16 @@
         <h1><strong>Partajarea de meme-uri nu a fost niciodată mai simplă!</strong></h1>
         <p>Platforma ideală pentru studenții de la Politehnică, 
             amuzați de câte materii o să pice semestrul asta.</p>
-        <button class="btn btnupload">Upload a MEME</button>
+         <AnchorLink ElementId="upload" >
+             <button>Upload a MEME</button>
+         </AnchorLink>
     </div>
     <div class="heroimg">
         <img src="img/hero1.svg" />
     </div>
 </section>
 
-<section class="fullhero uploadhero">
+<section id="upload" class="fullhero uploadhero">
     <div class="form-container">
         <div class="form-text">
             <h2>Ai tupeu și crezi că ești amuzant?</h2>
@@ -41,35 +43,11 @@
         <h2>Most viewed</h2>
     </div>
     <div class="images">
-        <div class="img-container">
+        @for(int i=0; i < 10; i++)
+        {
+            <div class="img-container">
 
-        </div>
-        <div class="img-container">
-
-        </div>
-        <div class="img-container">
-
-        </div>
-        <div class="img-container">
-
-        </div>
-        <div class="img-container">
-
-        </div>
-        <div class="img-container">
-
-        </div>
-        <div class="img-container">
-
-        </div>
-        <div class="img-container">
-
-        </div>
-        <div class="img-container">
-
-        </div>
-        <div class="img-container">
-
-        </div>
+            </div>
+        }
     </div>
 </section>

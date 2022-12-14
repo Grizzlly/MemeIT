@@ -28,6 +28,11 @@
     max-height: 100%;
 }
 
+.heroimg img {
+    width: 100%;
+    max-height: 100vh;
+}
+
 .herotext {
     padding: var(--padding);
     flex-direction: column;
@@ -79,4 +84,19 @@
     height: 200px;
     border-radius: 50px;
     background: grey;
+}
+
+@media (max-width: 767.98px) {
+    .landing {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .form-container {
+        flex-direction: column;
+    }
+
+    .uploadhero {
+        height: auto;
+    }
 }
