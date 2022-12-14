@@ -13,7 +13,6 @@ using System.Security.Claims;
 
 namespace MemeIT.Server.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("api")]
     public class MemesController : Controller
@@ -31,7 +30,7 @@ namespace MemeIT.Server.Controllers
                 .Map(dest => dest.CreatorUsername, src => src.Creator != null ? src.Creator!.UserName : null);
         }
 
-        [HttpGet]
+        [HttpGet, AllowAnonymous]
         [Route("memes")]
         public ActionResult<IEnumerable<MemeDto>> GetMemes()
         {
@@ -45,7 +44,7 @@ namespace MemeIT.Server.Controllers
             return Ok(memes.Select(x => x.Adapt<MemeDto>(config)));
         }
 
-        [HttpGet]
+        [HttpGet, AllowAnonymous]
         [Route("memes/{memeid:guid}")]
         public ActionResult<MemeDto> GetMeme(Guid memeid)
         {
@@ -60,7 +59,7 @@ namespace MemeIT.Server.Controllers
             else return Ok(meme.Adapt<MemeDto>(config));
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         [Route("memes")]
         public IActionResult InsertMeme([FromBody] MemeDto? meme)
         {
@@ -81,7 +80,7 @@ namespace MemeIT.Server.Controllers
             return CreatedAtRoute("memes", newMeme.MemeId);
         }
 
-        [HttpPut]
+        [HttpPut, Authorize]
         [Route("memes/{memeid:guid}")]
         public IActionResult PutMeme(Guid memeid, [FromBody] MemeDto? meme)
         {
@@ -98,7 +97,7 @@ namespace MemeIT.Server.Controllers
             return NoContent();
         }
 
-        [HttpDelete]
+        [HttpDelete, Authorize]
         [Route("memes/{memeid:guid}")]
         public IActionResult DeleteMeme(Guid memeid)
         {
